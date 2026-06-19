@@ -42,6 +42,15 @@ function logout() {
                     </Link>
 
                     <Link
+                        :href="route('transactions.index')"
+                        class="flex items-center gap-3 w-full px-4 py-3 rounded-xl text-sm transition-all duration-200"
+                        :class="page.url.startsWith('/transactions') ? 'bg-blue-600 text-white font-semibold' : 'text-slate-400 hover:bg-slate-800/60 hover:text-white font-medium'"
+                    >
+                        <span class="material-symbols-outlined text-[22px]">receipt_long</span>
+                        <span>Kelola Transaksi</span>
+                    </Link>
+
+                    <Link
                         :href="route('customers.index')"
                         class="flex items-center gap-3 w-full px-4 py-3 rounded-xl text-sm transition-all duration-200"
                         :class="page.url.startsWith('/customers') ? 'bg-blue-600 text-white font-semibold' : 'text-slate-400 hover:bg-slate-800/60 hover:text-white font-medium'"

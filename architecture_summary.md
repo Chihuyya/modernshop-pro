@@ -85,6 +85,20 @@ Laravel menggunakan "Model" untuk merepresentasikan setiap tabel MySQL.
 *   **Cara Kerja Kode**: 
     File-file ini menentukan bagaimana tabel saling terkait. Misalnya, di `Pesanan.php` terdapat fungsi `pelanggan()`. Di dalamnya tertulis `$this->belongsTo(Pelanggan::class, 'id_pelanggan')`. Kode pendek inilah yang memungkinkan Controller menarik data pesanan beserta nama pelanggan hanya dengan satu instruksi `Pesanan::with('pelanggan')`.
 
+## 7. Kelola Transaksi (Pencarian, Filter & Detail Belanja)
+
+Untuk melengkapi panel admin, sistem dilengkapi dengan manajemen transaksi terpusat yang menghubungkan data pelanggan dengan item belanjaannya.
+
+*   **Lokasi File Utama**: 
+    *   Routing: [routes/web.php](file:///c:/xampp/htdocs/db_toko_online/modernshop-pro/routes/web.php)
+    *   Controller: [app/Http/Controllers/TransactionController.php](file:///c:/xampp/htdocs/db_toko_online/modernshop-pro/app/Http/Controllers/TransactionController.php)
+    *   Frontend View: [resources/js/Pages/Transactions/Index.vue](file:///c:/xampp/htdocs/db_toko_online/modernshop-pro/resources/js/Pages/Transactions/Index.vue)
+*   **Cara Kerja Kode**:
+    1.  **Pengambilan Data Berelasi**: `TransactionController` menggunakan Eloquent `Pesanan::with(['pelanggan', 'detailPesanan.produk'])` untuk menarik data transaksi beserta detail produk yang dibeli dan identitas pembeli dalam satu kueri database.
+    2.  **Pencarian & Filter Terintegrasi**: Controller menyaring data berdasarkan parameter query string `search` (ID pesanan / nama pelanggan) dan `status` (menyesuaikan status transaksi).
+    3.  **Halaman Berpaginasi (Pagination)**: Menggunakan method `paginate(10)` untuk membatasi jumlah data per halaman demi menjaga performa loading database.
+    4.  **Modal Detail Invoice (Frontend)**: Komponen Vue menangkap seluruh relasi `detail_pesanan` dan menampilkannya dalam bentuk modal struk belanja/invoice terperinci saat tombol "Detail" diklik oleh admin.
+
 ---
 
 **Kesimpulan:**

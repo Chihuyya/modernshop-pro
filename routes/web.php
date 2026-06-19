@@ -18,6 +18,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::patch('/products/{product}/restock', [ProductController::class, 'restock'])->name('products.restock');
 
     // Transaksi
+    Route::get('/transactions', [\App\Http\Controllers\TransactionController::class, 'index'])->name('transactions.index');
     Route::put('/transactions/{id}/status', [\App\Http\Controllers\TransactionController::class, 'updateStatus'])->name('transactions.status');
 
     // Pelanggan
