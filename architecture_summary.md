@@ -99,6 +99,19 @@ Untuk melengkapi panel admin, sistem dilengkapi dengan manajemen transaksi terpu
     3.  **Halaman Berpaginasi (Pagination)**: Menggunakan method `paginate(10)` untuk membatasi jumlah data per halaman demi menjaga performa loading database.
     4.  **Modal Detail Invoice (Frontend)**: Komponen Vue menangkap seluruh relasi `detail_pesanan` dan menampilkannya dalam bentuk modal struk belanja/invoice terperinci saat tombol "Detail" diklik oleh admin.
 
+
+## 💡 Mengapa Sistem Ini Disebut Arsitektur Fullstack Modern?
+
+Sistem **ModernShop PRO** dikembangkan menggunakan pendekatan **Fullstack Modern**. Ini berbeda dengan model tradisional yang memisahkan tim frontend dan backend secara kaku:
+
+1. **Monolith Modern (Inertia.js)**:
+   * Menghilangkan kebutuhan untuk membangun API RESTful yang rumit khusus untuk kebutuhan panel admin internal.
+   * Kontroler Laravel mengalirkan data (sebagai *Props*) secara langsung ke komponen Vue.js tanpa perantara *state manager* (seperti Vuex/Pinia) atau routing frontend tambahan (seperti Vue Router).
+2. **Backend (Logika Server & Database)**:
+   * Memproses query database, mendefinisikan relasi Eloquent (misal: pesanan berelasi ke pelanggan dan detail barang), serta memvalidasi masukan data di sisi server sebelum disimpan ke MySQL.
+3. **Frontend (Interaksi UI & State)**:
+   * Merender UI secara reaktif menggunakan Vue 3, menangani transisi layar, serta merespon tindakan instan pengguna menggunakan Tailwind CSS dan dialog interaktif.
+
 ---
 
 **Kesimpulan:**
