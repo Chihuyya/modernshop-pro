@@ -1,0 +1,431 @@
+{
+  "info": {
+    "_postman_id": "8b9a1177-3e84-4866-9df3-010e6eb6e91f",
+    "name": "Toko Online API - Laravel Edition",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Login Admin",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "var jsonData = pm.response.json();\r",
+                  "if (jsonData.status === 'success' && jsonData.token) {\r",
+                  "    pm.collectionVariables.set('admin_token', jsonData.token);\r",
+                  "}"
+                ],
+                "type": "text/javascript",
+                "packages": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"username\": \"admin\",\r\n  \"password\": \"admin123\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost/db_toko_online/modernshop-pro/public/api/login",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "db_toko_online",
+                "modernshop-pro",
+                "public",
+                "api",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Produk",
+      "item": [
+        {
+          "name": "Select All Produk",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost/db_toko_online/modernshop-pro/public/api/produk",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "db_toko_online",
+                "modernshop-pro",
+                "public",
+                "api",
+                "produk"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Select 1 Produk (Berdasarkan ID)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost/db_toko_online/modernshop-pro/public/api/produk/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "db_toko_online",
+                "modernshop-pro",
+                "public",
+                "api",
+                "produk",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Insert Produk Baru",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"id_kategori\": 1,\r\n  \"nama_produk\": \"Sepatu Compass\",\r\n  \"harga\": 350000,\r\n  \"stok\": 15\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost/db_toko_online/modernshop-pro/public/api/produk",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "db_toko_online",
+                "modernshop-pro",
+                "public",
+                "api",
+                "produk"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update Produk (Berdasarkan ID)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"id_kategori\": 1,\r\n  \"nama_produk\": \"Sepatu Compass Update\",\r\n  \"harga\": 400000,\r\n  \"stok\": 10\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost/db_toko_online/modernshop-pro/public/api/produk/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "db_toko_online",
+                "modernshop-pro",
+                "public",
+                "api",
+                "produk",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Produk (Berdasarkan ID)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost/db_toko_online/modernshop-pro/public/api/produk/11",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "db_toko_online",
+                "modernshop-pro",
+                "public",
+                "api",
+                "produk",
+                "11"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Transaksi & Detail",
+      "item": [
+        {
+          "name": "Select All Transaksi",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost/db_toko_online/modernshop-pro/public/api/transaksi",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "db_toko_online",
+                "modernshop-pro",
+                "public",
+                "api",
+                "transaksi"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Select 1 Transaksi (Berdasarkan ID)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost/db_toko_online/modernshop-pro/public/api/transaksi/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "db_toko_online",
+                "modernshop-pro",
+                "public",
+                "api",
+                "transaksi",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Insert Transaksi Induk",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"id_pelanggan\": 1\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost/db_toko_online/modernshop-pro/public/api/transaksi",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "db_toko_online",
+                "modernshop-pro",
+                "public",
+                "api",
+                "transaksi"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Insert Transaksi Detail",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"id_pesanan\": 1,\r\n  \"id_produk\": 2,\r\n  \"jumlah\": 3\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost/db_toko_online/modernshop-pro/public/api/transaksi_detail",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "db_toko_online",
+                "modernshop-pro",
+                "public",
+                "api",
+                "transaksi_detail"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Transaksi Detail (Berdasarkan ID)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost/db_toko_online/modernshop-pro/public/api/transaksi_detail/1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "db_toko_online",
+                "modernshop-pro",
+                "public",
+                "api",
+                "transaksi_detail",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Statistik",
+      "item": [
+        {
+          "name": "Statistic Data",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{admin_token}}",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "http://localhost/db_toko_online/modernshop-pro/public/api/stats",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "path": [
+                "db_toko_online",
+                "modernshop-pro",
+                "public",
+                "api",
+                "stats"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "admin_token",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}
