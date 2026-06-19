@@ -4,6 +4,27 @@ Dokumen ini membedah secara teknis (hingga ke level kode) bagaimana sistem toko 
 
 ---
 
+## 🛠️ Stack Teknologi (Tech Stack)
+
+Sistem ini didesain menggunakan arsitektur **Hybrid SPA (Single Page Application)** modern yang memadukan keunggulan performa server PHP dengan antarmuka frontend yang responsif tanpa reload halaman.
+
+### 1. Sisi Frontend (Client-Side)
+*   **Framework Utama**: **Vue.js 3** (menggunakan *Composition API* dengan `<script setup>` untuk penulisan kode modern).
+*   **Jembatan Komunikasi**: **Inertia.js** (berperan sebagai *glue* / penghubung. Inertia menghilangkan kebutuhan membuat API routing & state management terpisah di frontend, karena Vue langsung menerima data `props` dari Laravel Controller).
+*   **Bundler & Compiler**: **Vite** (menyusun dan mengompres aset JavaScript dan CSS agar load-time menjadi instan).
+*   **Styling & Tampilan**: **Tailwind CSS** (menyediakan kerangka styling utility-first untuk desain yang bersih dan responsif).
+*   **Grafik & Visualisasi**: **Chart.js & Vue-Chartjs** (menggambar tren pendapatan real-time di Dashboard).
+
+### 2. Sisi Backend (Server-Side)
+*   **Framework Utama**: **Laravel 11 / 12** (PHP runtime modern, terstruktur, dan memiliki keamanan tinggi bawaan).
+*   **Database Relasional**: **MySQL** (menyimpan data master Produk, Kategori, Pelanggan, Pesanan, dan Detail Pesanan).
+*   **Sistem Autentikasi Ganda**:
+    *   *Web Admin*: Menggunakan **Session & Cookie** bawaan (menggunakan scaffolding Laravel Breeze untuk proteksi dashboard).
+    *   *Mobile/API*: Menggunakan **Custom API Token** (autentikasi bearer token mandiri yang dicocokkan langsung ke sistem *Cache* database).
+*   **Deployment Configuration**: Dilengkapi file `vercel.json` dan optimasi direktori `/tmp` agar siap dijalankan secara serverless di **Vercel**.
+
+---
+
 ## 1. Jantung API: Login & Pembuatan Token Dinamis
 
 Ketika klien eksternal (Postman/Mobile App) ingin login untuk mendapatkan akses API, prosesnya ditangani oleh blok kode ini.
